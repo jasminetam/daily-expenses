@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Container from "react-bootstrap/Container";
-import { Stack, Button } from "react-bootstrap";
+import './app.css'
 import BudgetCard from "../src/Components/BudgetCard";
 import BudgetInputModal from "../src/Components/BudgetInputModal";
 import ExpenseInputModal from "./Components/ExpenseInputModal";
@@ -11,6 +10,7 @@ import {
 import UncategorizedBudgetCard from "./Components/UncategorizedBudgetCard";
 import TotalBudgetCard from "./Components/TotalBudgetCard";
 import ExpensesViewModal from "./Components/ExpensesViewModal";
+
 
 export default function App() {
   const [showBudgetInputModal, setShowBudgetInputModal] = useState(false);
@@ -27,27 +27,22 @@ export default function App() {
 
   return (
     <>
-      <Container className="my-4">
-        <Stack direction="horizontal" gap="2" className="mb-4">
-          <h1 className="me-auto">Budgets</h1>
-          <Button
-            variant="primary"
+      <div className="containerWrapper">
+      <div className="container">
+        <div className="header">
+          <h1 className="titleName">Budgets</h1>
+          <div className="headerButtonsDiv">
+          <button className="headerButtons"
             onClick={() => setShowBudgetInputModal(true)}
           >
             Add Budget
-          </Button>
-          <Button variant="outline-primary" onClick={openExpenseInputModal}>
+          </button>
+          <button  className="headerButtons" onClick={openExpenseInputModal}>
             Add Expense
-          </Button>
-        </Stack>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-            gap: "1rem",
-            alignItems: "flex-start",
-          }}
-        >
+            </button>
+            </div>
+        </div>
+        <div className="card">
           {budgets.map((budget) => {
             const amount = getBudgetExpenses(budget.id).reduce(
               (total, expense) => total + expense.amount,
@@ -58,7 +53,7 @@ export default function App() {
                 key={budget.id}
                 name={budget.name}
                 amount={amount}
-                max={budget.max}
+                maxAmount={budget.maxAmount}
                 onExpenseInputClick={() => openExpenseInputModal(budget.id)}
                 onExpensesViewClick={() =>
                   setExpensesViewModalBudgetId(budget.id)
@@ -74,7 +69,7 @@ export default function App() {
           />
           <TotalBudgetCard />
         </div>
-      </Container>
+      </div>
       <BudgetInputModal
         show={showBudgetInputModal}
         handleClose={() => setShowBudgetInputModal(false)}
@@ -87,7 +82,8 @@ export default function App() {
       <ExpensesViewModal
         budgetId={expensesViewModalBudgetId}
         handleClose={() => setExpensesViewModalBudgetId()}
-      />
+        />
+        </div>
     </>
   );
 }

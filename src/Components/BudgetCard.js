@@ -5,60 +5,59 @@ import { currencyFormatter } from "./utils";
 export default function BudgetCard({
   name,
   amount,
-  max,
+  maxAmount,
   gray,
   hideButtons,
   onExpenseInputClick,
   onExpensesViewClick
 }) {
   const classNames = [];
-  if (amount > max) {
+  if (amount > maxAmount) {
     classNames.push("bg-danger", "bg-opacity-10");
   } else if (gray) {
     classNames.push("bg-light");
   }
 
   return (
-    <Card className={classNames.join(" ")}>
-      <Card.Body>
-        <Card.Title
-          className="d-flex justify-content-between 
-        align-items-baseline fw-normal mb-3"
-        >
+    <div >
+      <div className="cardBody">
+        <div className="cardTitle">
           <div className="me-2">{name}</div>
           <div className="d-flex align-items-baseline">
             {currencyFormatter.format(amount)}
-            {max && (<span className="text-muted fs-6 ms-1">
-              /  {currencyFormatter.format(max)}</span>
+            {maxAmount && (<span className="text-muted fs-6 ms-1">
+              /  {currencyFormatter.format(maxAmount)}</span>
             )}
           </div>
-        </Card.Title>
-        {max && (<ProgressBar
+          </div>
+        {maxAmount && (<ProgressBar
           className="rounded-pill"
-          variant={getProgressBarVariant(amount, max)}
+          variant={getProgressBarRatio(amount, maxAmount)}
           min={0}
-          max={max}
+          max={maxAmount}
           now={amount}
         />
         )}
-        {!hideButtons && (<Stack direction="horizontal" gap="2" className="mt-4">
-          <Button
-            variant="outline-primary"
-            className="ms-auto"
+        {!hideButtons && (<div className="cardButtonsDiv">
+          <button className="cardButtons"
             onClick={onExpenseInputClick}
           >
             Add Expense
-          </Button>
-          <Button onClick={ onExpensesViewClick}variant="outline-secondary">View Expenses</Button>
-        </Stack>
+          </button>
+          <button className="cardButtons"
+            onClick={onExpensesViewClick}
+            
+          >View Expenses
+          </button>
+        </div>
         )}
-      </Card.Body>
-    </Card>
+      </div>
+    </div>
   );
 }
 
-function getProgressBarVariant(amount, max) {
-  const ratio = amount / max;
+function getProgressBarRatio(amount, maxAmount) {
+  const ratio = amount / maxAmount;
   if (ratio < 0.5) return "primary";
   if (ratio < 0.75) return "warning";
   return "danger";
