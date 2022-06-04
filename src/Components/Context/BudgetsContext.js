@@ -18,12 +18,12 @@ export const BudgetsProvider = ({ children }) => {
     return expenses.filter((expense) => expense.budgetId === budgetId);
   }
 
-  function addBudget({ name, max }) {
+  function addBudget({ name, maxAmount }) {
     setBudgets((prevBudgets) => {
       if (prevBudgets.find((budget) => budget.name === name)) {
         return prevBudgets;
       }
-      return [...prevBudgets, { id: uuidV4(), name, max }];
+      return [...prevBudgets, { id: uuidV4(), name, maxAmount }];
     });
   }
 
@@ -33,25 +33,36 @@ export const BudgetsProvider = ({ children }) => {
     });
   }
 
-  function editBudget() {}
-  function editExpense() {}
+function editBudget() {}
+
+  function editExpense({updatedDescription, updatedAmount, id }) {
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map((expense) => {
+        if (expense.id === id) {
+          expense.description = updatedDescription
+          expense.amount = updatedAmount
+        }
+        return expense
+      })}
+    );
+  }
 
   function deleteBudget({ id }) {
-    setExpenses(prevExpenses => {
-      return prevExpenses.map(expense => {
-        if (expense.budgetId !== id) return expense
-        return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID }
-      })
-    })
+    setExpenses((prevExpenses) => {
+      return prevExpenses.map((expense) => {
+        if (expense.budgetId !== id) return expense;
+        return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID };
+      });
+    });
 
-    setBudgets(prevBudgets => {
-      return prevBudgets.filter(budget => budget.id !== id)
-    })
+    setBudgets((prevBudgets) => {
+      return prevBudgets.filter((budget) => budget.id !== id);
+    });
   }
   function deleteExpense({ id }) {
-    setExpenses(prevExpenses => {
-      return prevExpenses.filter(expense => expense.id !== id)
-    })
+    setExpenses((prevExpenses) => {
+      return prevExpenses.filter((expense) => expense.id !== id);
+    });
   }
   return (
     <BudgetsContext.Provider

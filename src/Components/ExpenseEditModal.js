@@ -1,32 +1,40 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
+import { Form, Button, Modal, Stack } from "react-bootstrap";
 import { useRef } from "react";
-import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "./Context/BudgetsContext";
+import { useBudgets } from "./Context/BudgetsContext";
+import { UNCATEGORIZED_BUDGET_ID } from "./Context/BudgetsContext";
 
-
-export default function ExpenseInputModal({
-  show,
+export default function ExpenseEditModal({
+    getBudgetExpenses,
   handleClose,
+  budgetId,
   defaultBudgetId,
 }) {
-
   const descriptionRef = useRef();
   const amountRef = useRef();
   const budgetIdRef = useRef();
   const [display, setDisplay] = useState(false);
   const [search, setSearch] = useState("");
   const wrapperRef = useRef(null);
-  const { addExpense, budgets, expenses } = useBudgets();
+  const { editExpense, budgets } = useBudgets();
 
   function handleSubmit(e) {
     e.preventDefault();
-    addExpense({
+    editExpense({
       description: descriptionRef.current.value,
       amount: parseFloat(amountRef.current.value),
       budgetId: budgetIdRef.current.value,
     });
     handleClose();
   }
+  const expenses = getBudgetExpenses(budgetId);
+  const budget =
+    UNCATEGORIZED_BUDGET_ID === budgetId
+      ? {
+          name: "Uncategorized",
+          id: UNCATEGORIZED_BUDGET_ID,
+        }
+      : budgets.find((b) => b.id === budgetId);
 
   const setSelected = (expense) => {
     setSearch(expense);
@@ -48,11 +56,16 @@ export default function ExpenseInputModal({
   };
 
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={budgetId != null} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title>New Expense</Modal.Title>
+          <Modal.Title>
+            <Stack direction="horizontal" gap="2">
+              <div>Expenses - {budget?.name}</div>
+            </Stack>
+          </Modal.Title>
         </Modal.Header>
+
         <Modal.Body>
           <Form.Group className="mb-3" controlled="description">
             <Form.Label>Description</Form.Label>
@@ -80,8 +93,7 @@ export default function ExpenseInputModal({
                         <span>{e.description}</span>
                       </div>
                     );
-                  })
-                }
+                  })}
               </div>
             )}
           </Form.Group>
@@ -108,7 +120,7 @@ export default function ExpenseInputModal({
           </Form.Group>
           <div className="d-flex justify-content-end">
             <Button variant="primary" type="submit">
-              Add
+              Edit
             </Button>
           </div>
         </Modal.Body>

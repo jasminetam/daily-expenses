@@ -5,13 +5,13 @@ import { useBudgets } from "./Context/BudgetsContext";
 
 export default function BudgetInputModal({ show, handleClose }) {
   const nameRef = useRef();
-  const maxRef = useRef();
+  const maxAmountRef = useRef();
   const { addBudget } = useBudgets();
   function handleSubmit(e) {
     e.preventDefault();
     addBudget({
       name: nameRef.current.value,
-      max: parseFloat(maxRef.current.value),
+      maxAmount: parseFloat(maxAmountRef.current.value),
     });
     handleClose();
   }
@@ -26,10 +26,10 @@ export default function BudgetInputModal({ show, handleClose }) {
             <Form.Label>Name</Form.Label>
             <Form.Control ref={nameRef} type="text" required />
           </Form.Group>
-          <Form.Group className="mb-3" controlled="max">
+          <Form.Group className="mb-3" controlled="maxAmount">
             <Form.Label>Maximum Spending</Form.Label>
             <Form.Control
-              ref={maxRef}
+              ref={maxAmountRef}
               type="number"
               required
               min={0}

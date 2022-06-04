@@ -5,9 +5,9 @@ import { useBudgets } from "./Context/BudgetsContext";
 export default function TotalBudgetCard() {
   const { expenses, budgets } = useBudgets();
   const amount = expenses.reduce((total, expense) => total + expense.amount, 0);
-  const max = budgets.reduce((total, budget) => total + budget.max, 0);
+  const maxAmount = budgets.reduce((total, budget) => total + budget.maxAmount, 0);
 
-  if (max === 0) return null;
+  if (maxAmount === 0) return null;
 
-  return <BudgetCard name="Total" amount={amount} gray max={max} hideButtons />;
+  return <BudgetCard name="Total" amount={amount} gray maxAmount={maxAmount} hideButtons />;
 }
