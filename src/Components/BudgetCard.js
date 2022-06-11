@@ -1,6 +1,8 @@
 import React from "react";
-import { Card, ProgressBar, Button, Stack } from "react-bootstrap";
+import { ProgressBar} from "react-bootstrap";
 import { currencyFormatter } from "./utils";
+import { RiAddFill } from "react-icons/ri";
+import { AiOutlineFolderView } from "react-icons/ai";
 
 export default function BudgetCard({
   name,
@@ -42,12 +44,12 @@ export default function BudgetCard({
           <button className="cardButtons"
             onClick={onExpenseInputClick}
           >
-            Add Expense
+            <RiAddFill /> Expense
           </button>
           <button className="cardButtons"
             onClick={onExpensesViewClick}
             
-          >View Expenses
+          ><AiOutlineFolderView /> View
           </button>
         </div>
         )}

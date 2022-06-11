@@ -72,6 +72,7 @@
   background-color: #649cef;
 }
 
-.cardButtons :hover {
+.cardButtons :hover,
+.headerButtons :hover{
     color:#0d6efd;
 }
