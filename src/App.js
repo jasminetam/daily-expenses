@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import "./app.css";
 import BudgetCard from "../src/Components/BudgetCard";
 import BudgetInputModal from "../src/Components/BudgetInputModal";
