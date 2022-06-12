@@ -1,3 +1,5 @@
+import styled from "styled-components"
+
 export const appStyle = styled.p`
 .containerWrapper {
     background-image: linear-gradient(
