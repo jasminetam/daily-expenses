@@ -1,5 +1,5 @@
 import React, { useState} from "react";
-import "./app.css";
+import "./app.styles"
 import BudgetCard from "../src/Components/BudgetCard";
 import BudgetInputModal from "../src/Components/BudgetInputModal";
 import ExpenseInputModal from "./Components/ExpenseInputModal";

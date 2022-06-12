@@ -4,6 +4,7 @@ import App from "./App";
 import { BudgetsProvider } from "../src/Components/Context/BudgetsContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>

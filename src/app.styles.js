@@ -1,3 +1,4 @@
+export const appStyle = styled.p`
 .containerWrapper {
     background-image: linear-gradient(
         to right,
@@ -76,3 +77,4 @@
 .headerButtons :hover{
     color:#0d6efd;
 }
+`
