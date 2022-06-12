@@ -1,8 +1,9 @@
 import React, { useState} from "react";
-import "./app.styles"
 import BudgetCard from "../src/Components/BudgetCard";
 import BudgetInputModal from "../src/Components/BudgetInputModal";
 import ExpenseInputModal from "./Components/ExpenseInputModal";
+import "./app.css"
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import {
   UNCATEGORIZED_BUDGET_ID,
   useBudgets,
