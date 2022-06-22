@@ -79,10 +79,13 @@
 
 @media screen and (max-width: 768px) {
   .titleName {
-    padding-top: 10px;
-  }
-  .headerButtons {
-    margin-top: 10px;
+    padding
   }
 }
 
+@media (min-width: 748px) and (max-width: 1536px) {
+  .content {
+    width: 90%;
+    height: 80%;
+  }
+}

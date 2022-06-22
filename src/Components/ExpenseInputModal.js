@@ -14,9 +14,8 @@ export default function ExpenseInputModal({
   const amountRef = useRef();
   const budgetIdRef = useRef();
   const [display, setDisplay] = useState(false);
-  const [search, setSearch] = useState("");
   const wrapperRef = useRef(null);
-  const { addExpense, budgets, expenses } = useBudgets();
+  const { addExpense, budgets } = useBudgets();
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,11 +26,6 @@ export default function ExpenseInputModal({
     });
     handleClose();
   }
-
-  const setSelected = (expense) => {
-    setSearch(expense);
-    setDisplay(false);
-  };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -59,31 +53,8 @@ export default function ExpenseInputModal({
             <Form.Control
               ref={descriptionRef}
               type="text"
-              onClick={() => setDisplay(!display)}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              required
             />
-            {display && (
-              <div>
-                {expenses
-                  .filter(
-                    ({ description }) =>
-                      description.indexOf(search.toLowerCase()) > -1
-                  )
-                  .map((e, i) => {
-                    return (
-                      <div
-                        onClick={() => setSelected(e.description)}
-                        key={i}
-                        tabIndex="0"
-                      >
-                        <span>{e.description}</span>
-                      </div>
-                    );
-                  })
-                }
-              </div>
-            )}
           </Form.Group>
           <Form.Group className="mb-3" controlled="amount">
             <Form.Label>Amount</Form.Label>
