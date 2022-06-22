@@ -77,12 +77,3 @@
     color:#0d6efd;
 }
 
-@media screen and (max-width: 768px) {
-  .titleName {
-    padding-top: 10px;
-  }
-  .headerButtons {
-    margin-top: 10px;
-  }
-}
-

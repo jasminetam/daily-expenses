@@ -86,3 +86,9 @@
   }
 }
 
+@media (min-width: 748px) and (max-width: 1536px) {
+  .content {
+    width: 90%;
+    height: 80%;
+  }
+}
