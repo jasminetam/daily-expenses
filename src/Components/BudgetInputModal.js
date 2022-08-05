@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
-import { useRef } from "react";
-import { useBudgets } from "./Context/BudgetsContext";
+import React from 'react';
+import { Form, Button, Modal } from 'react-bootstrap';
+import { useRef } from 'react';
+import { useBudgets } from './Context/BudgetsContext';
 
 export default function BudgetInputModal({ show, handleClose }) {
   const nameRef = useRef();
@@ -18,8 +18,21 @@ export default function BudgetInputModal({ show, handleClose }) {
   return (
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Budget</Modal.Title>
+        <Modal.Header>
+          <Modal.Title className="w-100">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div>New Budget</div>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlled="name">

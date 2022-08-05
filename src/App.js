@@ -37,10 +37,10 @@ export default function App() {
                 className="headerButtons"
                 onClick={() => setShowBudgetInputModal(true)}
               >
-                <RiAddFill /> Budget
+                <RiAddFill />Budget
               </button>
               <button className="headerButtons" onClick={openExpenseInputModal}>
-                <RiAddFill /> Expense
+                <RiAddFill />Expense
               </button>
             </div>
           </div>

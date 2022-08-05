@@ -58,8 +58,19 @@ export default function ExpenseEditModal({
   return (
     <Modal show={budgetId != null} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title>
+        <Modal.Header>
+          <Modal.Title className="w-100">
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
             <Stack direction="horizontal" gap="2">
               <div>Expenses - {budget?.name}</div>
             </Stack>
