@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
-import { useRef } from "react";
-import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "./Context/BudgetsContext";
-
+import React, { useState, useEffect } from 'react';
+import { Form, Button, Modal } from 'react-bootstrap';
+import { useRef } from 'react';
+import { useBudgets, UNCATEGORIZED_BUDGET_ID } from './Context/BudgetsContext';
 
 export default function ExpenseInputModal({
   show,
   handleClose,
   defaultBudgetId,
 }) {
-
   const descriptionRef = useRef();
   const amountRef = useRef();
   const budgetIdRef = useRef();
@@ -28,9 +26,9 @@ export default function ExpenseInputModal({
   }
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -44,17 +42,26 @@ export default function ExpenseInputModal({
   return (
     <Modal show={show} onHide={handleClose}>
       <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title>New Expense</Modal.Title>
+        <Modal.Header>
+          <Modal.Title className="w-100">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              onClick={() => {
+                handleClose();
+              }}
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div>New Expense</div>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlled="description">
             <Form.Label>Description</Form.Label>
-            <Form.Control
-              ref={descriptionRef}
-              type="text"
-              required
-            />
+            <Form.Control ref={descriptionRef} type="text" required />
           </Form.Group>
           <Form.Group className="mb-3" controlled="amount">
             <Form.Label>Amount</Form.Label>
@@ -67,7 +74,7 @@ export default function ExpenseInputModal({
             />
           </Form.Group>
           <Form.Group className="mb-3" controlled="budgetId">
-            <Form.Label>Budget</Form.Label>
+            <Form.Label className="mr-3">Budget</Form.Label>
             <Form.Select defaultValue={defaultBudgetId} ref={budgetIdRef}>
               <option id={UNCATEGORIZED_BUDGET_ID}>Uncategorized</option>
               {budgets.map((budget) => (
